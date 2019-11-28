@@ -1,6 +1,17 @@
 # FurtherNYT
 Self-learning past NYT in tutorial content. See notes below for tutorial content.
 
+**Added 28th November 2019**
+- Allowed the storage of complex objects (i.e. "BuyLinks" from the Books.java file) by adding another table linked by a Foreign Key
+- Created many AsyncTasks to ensure that none of these new transactions were running on the main thread.
+- Displayed BuyLinks data in a RecyclerView in the Book DetailActivity.
+  - Automatically adjusts inputted data to change "http" links to "https" (my own simple logic code).
+  - Intent from these links send an ACTION_VIEW intent to web browser.
+- Added "ripple" animations throughout the application.
+- Added dividers on some RecyclerViews.
+
+----------------------------------------------------------------------------------------------------------------------------------
+
 **Week 9**
 - Add GetBooksAsyncTask and InsertBooksAsyncTask to move database queries off of the main thread.
 - Add AsyncTaskGetDelegate and AsyncTaskInsertDelegate interfaces to be used in the delegates for the tasks.
