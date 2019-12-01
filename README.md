@@ -10,6 +10,7 @@ Self-learning past NYT in tutorial content. See notes below for tutorial content
  - To make this better (and save the users mobile data) make the list not update unless it is a new Calendar day (unless they swipe to refresh)
  - This should also make the application useable even if the user has no internet connection (although you will need to display some sort of warning that they are looking at older, cached data)
 
+----------------------------------------------------------------------------------------------------------------------------------
 
 **Added 28th November 2019**
 - Allowed the storage of complex objects (i.e. "BuyLinks" from the Books.java file) by adding another table linked by a Foreign Key
