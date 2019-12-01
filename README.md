@@ -1,6 +1,16 @@
 # FurtherNYT
 Self-learning past NYT in tutorial content. See notes below for tutorial content.
 
+**Product Backlog**
+- Use and learn about ViewModel to reduce the number of AsyncTasks and hopefully cleanup code
+- Add tab bars to the news article fragment (so that you can change the articles you receive), could also come in the form of filters
+ - For example: You can touch a tab to get the most popular stories for the day, week, etc?
+- Add a filter feature for bestsellers! So you can choose the category of book you want!
+- Add "swipe to refresh" functionality
+ - To make this better (and save the users mobile data) make the list not update unless it is a new Calendar day (unless they swipe to refresh)
+ - This should also make the application useable even if the user has no internet connection (although you will need to display some sort of warning that they are looking at older, cached data)
+
+
 **Added 28th November 2019**
 - Allowed the storage of complex objects (i.e. "BuyLinks" from the Books.java file) by adding another table linked by a Foreign Key
 - Created many AsyncTasks to ensure that none of these new transactions were running on the main thread.
