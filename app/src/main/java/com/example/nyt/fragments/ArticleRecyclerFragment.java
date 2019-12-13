@@ -4,29 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.nyt.ArticleAdapter;
-import com.example.nyt.FakeDatabase;
 import com.example.nyt.R;
 import com.example.nyt.activities.MainActivity;
-import com.example.nyt.model.TopStoriesResponse;
-import com.google.gson.Gson;
+import com.example.nyt.model.Article;
+import com.example.nyt.viewmodel.ArticleViewModel;
+
+import java.util.List;
 
 
 public class ArticleRecyclerFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    private List<Article> articleList;
 
     public ArticleRecyclerFragment() {
         // Required empty public constructor
@@ -43,35 +40,18 @@ public class ArticleRecyclerFragment extends Fragment {
         // REFER to the comments in BookRecyclerAdapter
 
         final ArticleAdapter articleAdapter = new ArticleAdapter();
-        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        String url = "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=" + getString(R.string.nyt_api_key);
 
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
+        //Using ViewModel to Observe changes in data
+        ArticleViewModel viewModel = ViewModelProviders.of(this).get(ArticleViewModel.class);
+        viewModel.setContext(getContext());
+        Observer<List<Article>> articleObserver = new Observer<List<Article>>() {
             @Override
-            public void onResponse(String response) {
-                //this is because NYT when it doesn't have any media returns "" instead of []
-                //this makes gson unhappy because it expects am array and gets a string instead
-                response = response.replace("media\":\"\"", "media\":[]");
-                Gson gson = new Gson();
-                TopStoriesResponse topStoriesResponse = gson.fromJson(response, TopStoriesResponse.class);
-                articleAdapter.setData(topStoriesResponse.results);
-                FakeDatabase.saveArticlesToFakeDatabase(topStoriesResponse.results);
+            public void onChanged(List<Article> articles) {
+                articleAdapter.setData(articles);
                 recyclerView.setAdapter(articleAdapter);
-                requestQueue.stop();
             }
         };
-
-        Response.ErrorListener errorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "The request failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                requestQueue.stop();
-            }
-        };
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener,
-                errorListener);
-        requestQueue.add(stringRequest);
+        viewModel.getArticles().observe(this, articleObserver);
 
         return view;
 

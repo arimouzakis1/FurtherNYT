@@ -11,6 +11,11 @@ Self-learning past NYT in tutorial content. See notes below for tutorial content
   - This should also make the application useable even if the user has no internet connection (although you will need to display some sort of warning that they are looking at older, cached data)
 
 ----------------------------------------------------------------------------------------------------------------------------------
+**Added 13th December 2019**
+- ViewModel is now used for the Article Recycler View
+
+
+
 
 **Added 28th November 2019**
 - Allowed the storage of complex objects (i.e. "BuyLinks" from the Books.java file) by adding another table linked by a Foreign Key
