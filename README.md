@@ -1,5 +1,5 @@
 # FurtherNYT
-Self-learning past NYT in tutorial content. See notes below for tutorial content.
+Self-learning/testing additional functionality past NYT in tutorial content. See notes below for tutorial content.
 
 **Product Backlog**
 - Use and learn about ViewModel to reduce the number of AsyncTasks and hopefully cleanup code
